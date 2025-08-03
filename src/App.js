@@ -91,18 +91,19 @@ export default function Game() {
                 <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} currentMove={currentMove} rowCol={rowCol}/>
             </div>
             <div className="game-info">
-                <button onClick={() => setIsAscending(!isAscending)}>Toggle order.</button>
-                <ol>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                onClick={() => setIsAscending(!isAscending)}>Toggle order.</button>
+                <ol className="w-full overflow-auto">
                     {sortedMoves.map((item, index) => {
                         const displayNumber = isAscending ? index + 1 : sortedMoves.length - index;
                         return (
-                            <li className="no-number" key={item.move}>
-                                <span>{displayNumber}. </span>
+                            <li className="no-number w-full" key={item.move}>
                                 {item.move === currentMove
                                     ? (item.move === 0
-                                        ? <span>You are at the game start.</span>
-                                        : <span>You are at move #{item.move} { rowCol[ item.move ]}</span>)
-                                    : <button onClick={() => jumpTo(item.move)}>{item.description}</button>
+                                        ? <span class="block w-full  bg-green-100 hover:bg-green-300 text-gray-800 font-semibold py-0.5 px-2 border border-gray-400 rounded shadow">{displayNumber}. You are at the game start.</span>
+                                        : <span class="block w-full bg-green-100 hover:bg-green-300 text-gray-800 font-semibold py-0.5 px-2 border border-gray-400 rounded shadow">{displayNumber}. You are at move #{item.move} { rowCol[ item.move ]}</span>)
+                                    : <button class="block w-full bg-white hover:bg-green-300 text-gray-800 font-semibold py-0.5 px-2 border border-gray-400 rounded shadow"
+                                    onClick={() => jumpTo(item.move)}>{displayNumber}. {item.description}</button>
                                 }
                             </li>
                         );
